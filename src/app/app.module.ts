@@ -4,6 +4,7 @@ import {MyApp} from "./app.component";
 import {TabsPage} from "../pages/tabs/tabs";
 import {HomePage} from "../pages/home";
 import {WorldPage} from "../pages/world";
+import {HttpService, UtilService} from "../pages/providers";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,10 @@ import {WorldPage} from "../pages/world";
     HomePage,
     WorldPage
   ],
-  providers: []
+  providers: [
+    HttpService,
+    UtilService
+  ]
 })
 export class AppModule {
 }
