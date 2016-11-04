@@ -17,6 +17,10 @@ export class UtilService {
     return this.databaseService.get('timeFormat').then(timeFormat=> timeFormat ? timeFormat : '12');
   }
 
+  getLocation(): Promise<string> {
+    return this.databaseService.get('location').then(location=> location ? location : '95134');
+  }
+
   formatTemp(temp: number, metric: string): string {
     if (!temp) {
       return null;

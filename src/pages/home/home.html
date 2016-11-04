@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="currentWeather">
     <ion-item color="primary" style="text-align: center" (click)="itemClicked(currentWeather)">
       <h2>{{utilService.getTodayString(currentWeather?.dt,timeFormat)}}</h2>
       <ion-grid>

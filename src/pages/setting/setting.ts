@@ -17,11 +17,11 @@ export class SettingPage {
 
   ionViewWillEnter() {
     this.databaseService.get('location')
-      .then(value=>this.location = value || '95134');
+      .then(value=>this.location = value);
     this.databaseService.get('metric')
-      .then(value=>this.metric = value || 'F');
+      .then(value=>this.metric = value);
     this.databaseService.get('timeFormat')
-      .then(value=>this.timeFormat = value || '12');
+      .then(value=>this.timeFormat = value);
   }
 
   changeLocation() {
