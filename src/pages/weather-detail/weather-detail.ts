@@ -9,10 +9,14 @@ import {UtilService} from "../providers";
 export class WeatherDetailPage {
 
   weatherObj: any;
+  metric: string;
+  timeFormat: string;
 
   constructor(public params: NavParams,
               public utilService: UtilService) {
     this.weatherObj = params.data.weatherObj;
+    this.metric = params.data.metric;
+    this.timeFormat = params.data.timeFormat;
   }
 
 }

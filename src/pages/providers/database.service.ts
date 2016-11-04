@@ -18,7 +18,13 @@ export class DatabaseService {
 
   get(key: string): Promise<string> {
     return this._db.get(key)
-      .then(value=> value)
+      .then(value=> {
+        if (value) {
+          return value;
+        } else {
+          throw new Error('Undefined value');
+        }
+      })
       .catch(err=> {
         console.error('[Error] Getting ' + key + ' - ' + JSON.stringify(err));
         return null;

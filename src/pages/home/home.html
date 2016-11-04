@@ -11,12 +11,12 @@
 <ion-content>
   <ion-list>
     <ion-item color="primary" style="text-align: center" (click)="itemClicked(currentWeather)">
-      <h2>{{utilService.getTodayString(currentWeather?.dt)}}</h2>
+      <h2>{{utilService.getTodayString(currentWeather?.dt,timeFormat)}}</h2>
       <ion-grid>
         <ion-row>
           <ion-col width-33>
             <div class="vertical-center">
-              <h1 [innerHTML]="utilService.formatTemp(currentWeather?.main.temp)" style="font-size:3.6rem"></h1>
+              <h1 style="font-size:3.6rem">{{utilService.formatTemp(currentWeather?.main.temp,metric)}}</h1>
               <h2 *ngIf="currentWeather?.weather">{{currentWeather?.weather[0].main}}</h2>
             </div>
           </ion-col>
@@ -26,18 +26,18 @@
           </ion-col>
           <ion-col width-33>
             <img [src]="'assets/img/weather/sunrise.png'" style="max-width:40%">
-            <h2>{{utilService.getTimeString(currentWeather?.sys?.sunrise)}}</h2>
+            <h2>{{utilService.getTimeString(currentWeather?.sys?.sunrise,timeFormat)}}</h2>
             <img [src]="'assets/img/weather/sunset.png'" style="max-width:40%">
-            <h2>{{utilService.getTimeString(currentWeather?.sys?.sunset)}}</h2>
+            <h2>{{utilService.getTimeString(currentWeather?.sys?.sunset,timeFormat)}}</h2>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
     <ion-item *ngFor="let item of dailyWeatherList" (click)="itemClicked(item)">
       <img [src]="utilService.getWeatherIcon(item.weather[0],item.dt)" item-left style=" max-width: 12%">
-      <h2>{{utilService.getFriendlyDayString(item.dt)}}</h2>
+      <h2>{{utilService.getMediumDayString(item.dt,timeFormat)}}</h2>
       <h3>{{item.weather[0].main}}</h3>
-      <h2 item-right padding-right [innerHTML]="utilService.formatTemp(item.main.temp)"></h2>
+      <h2 item-right padding-right>{{utilService.formatTemp(item.main.temp,metric)}}</h2>
     </ion-item>
   </ion-list>
 </ion-content>

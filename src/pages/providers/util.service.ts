@@ -1,32 +1,50 @@
 import {Injectable} from "@angular/core";
 import * as moment from "moment";
+import {DatabaseService} from "./database.service";
 
 @Injectable()
 export class UtilService {
 
-  getTempUnit(): string {
-    //TODO
-    return 'F';
+  constructor(public databaseService: DatabaseService) {
+
   }
 
-  formatTemp(temp: number): string {
-    return this.roundVal(temp) + '&deg;' + this.getTempUnit();
+  getMetric(): Promise<string> {
+    return this.databaseService.get('metric').then(metric=> metric ? metric : 'F');
   }
 
-  getFriendlyDayString(epoch: number): string {
-    return moment.unix(epoch).format('ddd, MMM D hh:mm A');
+  getTimeFormat(): Promise<string> {
+    return this.databaseService.get('timeFormat').then(timeFormat=> timeFormat ? timeFormat : '12');
   }
 
-  getFullDayString(epoch: number): string {
-    return moment.unix(epoch).format('dddd, MMMM D hh:mm A');
+  formatTemp(temp: number, metric: string): string {
+    if (!temp) {
+      return null;
+    }
+    if (metric === 'F') {
+      temp = (temp * 1.8) + 32;
+    }
+    return Math.round(temp) + '\u00B0' + metric;
   }
 
-  getTimeString(epoch: number): string {
-    return moment.unix(epoch).format('hh:mm A');
+  getMediumDayString(epoch: number, timeFormat: string): string {
+    return epoch ? moment.unix(epoch).format('ddd, MMM D') + ' ' + this.getTimeString(epoch, timeFormat) : null;
   }
 
-  getTodayString(epoch: number): string {
-    return 'Today, ' + moment.unix(epoch).format('MMMM D hh:mm A');
+  getFullDayString(epoch: number, timeFormat: string): string {
+    return epoch ? moment.unix(epoch).format('dddd, MMMM D') + ' ' + this.getTimeString(epoch, timeFormat) : null;
+  }
+
+  getTodayString(epoch: number, timeFormat: string): string {
+    return epoch ? 'Today, ' + moment.unix(epoch).format('MMMM D') + ' ' + this.getTimeString(epoch, timeFormat) : null;
+  }
+
+  getTimeString(epoch: number, timeFormat: string): string {
+    let pattern = 'hh:mm A';
+    if (timeFormat === '24') {
+      pattern = 'HH:mm';
+    }
+    return epoch ? moment.unix(epoch).format(pattern) : null;
   }
 
   getWeatherIcon(weatherObj: any, epoch: number): string {
@@ -64,10 +82,12 @@ export class UtilService {
 
   getFormattedWind(windSpeed: number, degrees: number): string {
     let windFormat: string = 'km/h';
-    if (this.getTempUnit() === 'F') {
-      windFormat = 'mph';
-      windSpeed = 0.621371192237334 * windSpeed;
-    }
+    this.getMetric().then(metric=> {
+      if (metric === 'F') {
+        windFormat = 'mph';
+        windSpeed = 0.621371192237334 * windSpeed;
+      }
+    });
 
     let direction: string = "Unknown";
     if (degrees >= 337.5 || degrees < 22.5) {
@@ -90,7 +110,7 @@ export class UtilService {
     return this.roundVal(windSpeed) + ' ' + windFormat + ' ' + direction;
   }
 
-  roundVal(val:number):number{
+  roundVal(val: number): number {
     return Math.round(val);
   }
 }

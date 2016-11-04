@@ -11,22 +11,21 @@ export class HttpService {
   constructor(public http: Http) {
   }
 
-  getDailyWeather(zip: string, units?: string): Observable<any> {
-    return this.get(zip, units, 'forecast');
+  getDailyWeather(zip: string): Observable<any> {
+    return this.get(zip, 'forecast');
   }
 
-  getCurrentWeather(zip: string, units?: string): Observable<any> {
-    return this.get(zip, units, 'weather');
+  getCurrentWeather(zip: string): Observable<any> {
+    return this.get(zip, 'weather');
   }
 
-  private get(zip: string, units: string, type: string): Observable<any> {
+  private get(zip: string, type: string): Observable<any> {
     let url: string = "http://api.openweathermap.org/data/2.5/" + type;
     let params = new URLSearchParams();
     params.set('zip', zip);
-    params.set('units', units || 'imperial');
+    params.set('units', 'metric');
     params.set('mode', 'json');
     params.set('appid', '108ecdf141fd30a25ba642f98339eaaf');
-    console.log(params.toString());
     return this.http.get(url, {search: params})
       .map(this.extractData)
       .catch(this.handleError);
