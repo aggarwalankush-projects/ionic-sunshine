@@ -1,0 +1,32 @@
+<!--suppress ALL -->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Temperature Metric</ion-label>
+      <ion-select [(ngModel)]="metric" (ionChange)="metricChange()">
+        <ion-option value="C">Celsius</ion-option>
+        <ion-option value="F">Fahrenheit</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time Format</ion-label>
+      <ion-select [(ngModel)]="timeFormat" (ionChange)="timeFormatChange()">
+        <ion-option value="12">12 Hour</ion-option>
+        <ion-option value="24">24 Hour</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-item class="item-select" (click)="changeLocation()">
+      <ion-label>Location</ion-label>
+      <ion-note item-right style="color:inherit">{{location}}</ion-note>
+    </button>
+  </ion-list>
+</ion-content>

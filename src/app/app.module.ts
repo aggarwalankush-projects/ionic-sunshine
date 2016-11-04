@@ -4,8 +4,9 @@ import {MyApp} from "./app.component";
 import {TabsPage} from "../pages/tabs/tabs";
 import {HomePage} from "../pages/home";
 import {WorldPage} from "../pages/world";
-import {HttpService, UtilService} from "../pages/providers";
+import {HttpService, UtilService, DatabaseService, Sql} from "../pages/providers";
 import {WeatherDetailPage} from "../pages/weather-detail";
+import {SettingPage} from "../pages/setting";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {WeatherDetailPage} from "../pages/weather-detail";
     TabsPage,
     HomePage,
     WorldPage,
-    WeatherDetailPage
+    WeatherDetailPage,
+    SettingPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,11 +26,14 @@ import {WeatherDetailPage} from "../pages/weather-detail";
     TabsPage,
     HomePage,
     WorldPage,
-    WeatherDetailPage
+    WeatherDetailPage,
+    SettingPage
   ],
   providers: [
     HttpService,
-    UtilService
+    UtilService,
+    DatabaseService,
+    Sql
   ]
 })
 export class AppModule {

@@ -1,13 +1,16 @@
-import {Component} from "@angular/core";
-import {Platform} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
+import {Platform, Nav} from "ionic-angular";
 import {StatusBar, Splashscreen} from "ionic-native";
 import {TabsPage} from "../pages/tabs/tabs";
+import {SettingPage} from "../pages/setting";
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(Nav) nav: Nav;
+
   rootPage = TabsPage;
 
   constructor(platform: Platform) {
@@ -19,7 +22,7 @@ export class MyApp {
     });
   }
 
-  openSettings(){
-    console.log('opening settings');
+  openSettings() {
+    this.nav.push(SettingPage);
   }
 }
