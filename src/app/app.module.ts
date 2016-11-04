@@ -5,13 +5,15 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {HomePage} from "../pages/home";
 import {WorldPage} from "../pages/world";
 import {HttpService, UtilService} from "../pages/providers";
+import {WeatherDetailPage} from "../pages/weather-detail";
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
     HomePage,
-    WorldPage
+    WorldPage,
+    WeatherDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -21,7 +23,8 @@ import {HttpService, UtilService} from "../pages/providers";
     MyApp,
     TabsPage,
     HomePage,
-    WorldPage
+    WorldPage,
+    WeatherDetailPage
   ],
   providers: [
     HttpService,

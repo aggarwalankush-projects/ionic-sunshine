@@ -5,7 +5,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage = TabsPage;
@@ -17,5 +17,9 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  openSettings(){
+    console.log('opening settings');
   }
 }

@@ -1,7 +1,9 @@
 import {Component} from "@angular/core";
 import {HttpService, UtilService} from "../providers";
-import * as moment from "moment";
-import * as _ from "lodash";
+import {NavController} from "ionic-angular";
+import {WeatherDetailPage} from "../weather-detail";
+// import * as moment from "moment";
+// import * as _ from "lodash";
 
 @Component({
   selector: 'page-home',
@@ -12,11 +14,13 @@ export class HomePage {
   dailyWeatherList: Array<any> = [];
   currentWeather: any;
 
-  constructor(public httpService: HttpService, public utilService: UtilService) {
+  constructor(public navCtrl: NavController,
+              public httpService: HttpService,
+              public utilService: UtilService) {
   }
 
   ionViewWillEnter() {
-    let zip = '95134';
+    // let zip = '95134';
     // this.httpService.getDailyWeather(zip).subscribe(
     //   data=> {
     //     console.log(data);
@@ -1362,5 +1366,10 @@ export class HomePage {
       name: "Jind",
       cod: 200
     };
+  }
+
+  itemClicked(item: any) {
+    console.log('clicked', item);
+    this.navCtrl.push(WeatherDetailPage, {weatherObj: item})
   }
 }
