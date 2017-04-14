@@ -1,4 +1,1 @@
-Ionic 2 Sunshine App
-====================
-
-Icons - Designed by Freepik and distributed by Flaticon
+See https://github.com/aggarwalankush/ionic2-mosum for Ionic 2 Weather app
